@@ -6,9 +6,11 @@ import { HistoryContainer, HistoryList, Status } from './styles'
 
 export function History() {
     const { cycles } = useContext(CyclesContext)
+
     return (
         <HistoryContainer>
             <h1>Meu histórico</h1>
+
             <HistoryList>
                 <table>
                     <thead>
@@ -26,7 +28,7 @@ export function History() {
                                 <td>{cycle.task}</td>
                                 <td>{cycle.minutesAmount} minutos</td>
                                 <td>
-                                    {formatDistanceToNow(cycle.startDate, {
+                                    {formatDistanceToNow(new Date(cycle.startDate), {
                                         addSuffix: true,
                                         locale: ptBR,
                                     })}
@@ -35,9 +37,11 @@ export function History() {
                                     {cycle.finishedDate && (
                                         <Status statusColor="green">Concluído</Status>
                                     )}
+
                                     {cycle.interruptedDate && (
                                         <Status statusColor="red">Interrompido</Status>
                                     )}
+
                                     {!cycle.finishedDate && !cycle.interruptedDate && (
                                         <Status statusColor="yellow">Em andamento</Status>
                                     )}
